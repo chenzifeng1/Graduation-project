@@ -17,6 +17,8 @@ public interface BookRepository extends Neo4jRepository<Book,Integer> {
 
     Iterable<Book> findBookByAuthor(String author);
     Iterable<Book> findBooksByField(String field);
-    Iterable<Book> findBooksByName(String name);
+    Book findFirstByName(String name);
 
+    @Query("MATCH (n:book) RETURN n LIMIT 25")
+    Iterable<Book> getBookSimple();
 }

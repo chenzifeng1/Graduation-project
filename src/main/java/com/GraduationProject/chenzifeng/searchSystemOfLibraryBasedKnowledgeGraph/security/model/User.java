@@ -1,4 +1,4 @@
-package com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.service.model;
+package com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.security.model;
 
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;

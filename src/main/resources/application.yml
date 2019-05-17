@@ -1,8 +1,8 @@
 spring:
   datasource:
     neo4j:
-      uri: http://127.0.0.1:7474
+      #uri: http://127.0.0.1:7474
       #驱动模式
-      #blotUri: bolt://127.0.0.1:7687
+      blotUri: bolt://127.0.0.1:7687
       username: neo4j
       password: neo4j
