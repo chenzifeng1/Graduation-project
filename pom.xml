@@ -20,21 +20,19 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-neo4j</artifactId>
-		</dependency>
+
+
 		<!--
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.service</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.service</groupId>
-			<artifactId>spring-com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.service-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.service</groupId>
+            <artifactId>spring-com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.service-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -51,10 +49,18 @@
 			<scope>test</scope>
 		</dependency>
 
+
+		<dependency>
+			<groupId>org.neo4j</groupId>
+			<artifactId>neo4j</artifactId>
+			<version>3.2.9</version>
+			<scope>runtime</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.neo4j</groupId>
 			<artifactId>neo4j-ogm-bolt-driver</artifactId>
-			<version>3.1.8</version>
+			<version>${neo4j-ogm.version}</version>
 		</dependency>
 
 
@@ -81,9 +87,43 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.36</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>2.1.6.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-neo4j</artifactId>
+			<version>5.1.6.RELEASE</version>
+		</dependency>
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-cypher</artifactId>
+            <version>2.3.3</version>
+        </dependency>
 
 
-	</dependencies>
+        <!--
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-neo4j</artifactId>
+            <version>3.1.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-ogm-core</artifactId>
+            <version>3.1.8</version>
+        </dependency>
+        -->
+
+    </dependencies>
 
 	<build>
 		<plugins>

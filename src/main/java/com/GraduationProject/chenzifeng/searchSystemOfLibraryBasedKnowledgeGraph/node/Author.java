@@ -1,29 +1,44 @@
 package com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.node;
 
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Property;
+import org.neo4j.ogm.annotation.*;
+
+import javax.annotation.Generated;
 
 
-@NodeEntity
+@NodeEntity(label = "author")
 public class Author {
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
 
     @Property(name = "name")
     private String name;
-
+    @Property
+    private String nation;
 
     public Author(String name) {
         this.name = name;
     }
 
+    public Author(String name, String nation) {
+        this.name = name;
+        this.nation = nation;
+    }
     public Author() {
     }
 
-    public int getId() {
+    @Relationship(type = "nation",direction =Relationship.OUTGOING)
+    private Nation nationality; //国籍
+
+    public Nation getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(Nation nationality) {
+        this.nationality = nationality;
+    }
+
+    public Long getId() {
         return id;
     }
 
@@ -33,5 +48,13 @@ public class Author {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNation() {
+        return nation;
+    }
+
+    public void setNation(String nation) {
+        this.nation = nation;
     }
 }
