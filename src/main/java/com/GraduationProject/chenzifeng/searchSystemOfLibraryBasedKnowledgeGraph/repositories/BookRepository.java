@@ -1,14 +1,13 @@
 package com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.repositories;
 
 import com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.node.Book;
-import com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.node.Field;
+import com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.node.Keyword;
 import org.springframework.data.neo4j.annotation.Query;
 
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 @Repository
@@ -25,10 +24,11 @@ public interface BookRepository extends Neo4jRepository<Book,Long> {
      * @param bookName
      * @return
      */
-    @Query("MATCH(n:book) WHERE n.name = bookName return n")
     Book findFirstByName(@Param("bookName") String bookName);
-    @Query("MATCH (n:book) RETURN n")
+
+
     Collection<Book> findAll();
+
     @Query("MATCH (n:book) RETURN n LIMIT 25")
     Collection<Book> getBookSimple();
 
@@ -37,7 +37,9 @@ public interface BookRepository extends Neo4jRepository<Book,Long> {
      * @param field
      * @return
      */
-    @Query("MATCH p=(n:book)-[r:`belong to`]->(keyword{name:field}) RETURN n LIMIT 5")
+    @Query("match p=(n:book)-[r:`belong to`]->(k:keyword) " +
+            "where k.name ={field} " +
+            "return n ")
     Collection<Book> getBookFromField(@Param("field")String field);
 
     /**
@@ -45,8 +47,8 @@ public interface BookRepository extends Neo4jRepository<Book,Long> {
      * @param bookName
      * @return
      */
-    @Query("MATCH p=(:book{name:bookName})-[r:`belong to`]->(n:keyword) RETURN n LIMIT 25")
-    Collection<Field> getBookField(@Param("bookName") String bookName);
+    @Query("MATCH p=(b:book)-[r:`belong to`]->(n:keyword) WHERE b.name ={bookName} RETURN n LIMIT 3")
+    Collection<Keyword> getBookField(@Param("bookName") String bookName);
 
 
 }

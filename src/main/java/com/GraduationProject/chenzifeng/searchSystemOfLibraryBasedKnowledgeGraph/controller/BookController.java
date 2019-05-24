@@ -1,11 +1,14 @@
 package com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.controller;
 
-import com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.repositories.BookRepository;
+import com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.node.Keyword;
 import com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.node.Book;
+import com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.service.LogDescribe;
 import com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.service.impl.BookServiceImpl;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +25,7 @@ public class BookController {
     @Autowired
     private BookServiceImpl bookService;
 
-
+    protected final Logger logger = LoggerFactory.getLogger(LogDescribe.Book_C);
 
 
     @GetMapping(path = "/getBook")
@@ -32,7 +35,7 @@ public class BookController {
     }
 
     @ApiOperation(value = "根据书名获取书籍",notes = "返回从此节点出发的关系的所有书籍，仅一层关系")
-    @ApiImplicitParam(name = "bookName", value = "书名", required = true, dataType = "String", paramType = "path")
+    @ApiImplicitParam(name = "bookName", value = "书名", required = true, dataType = "String", paramType = "query")
     @GetMapping(path = "/getBookByName")
     public Book getBookByName(String bookName){
 
@@ -42,9 +45,9 @@ public class BookController {
     @ApiOperation(value = "创建图书节点",notes = "图书节点信息：书名，作者，领域")
     @ApiImplicitParams(
             {
-                @ApiImplicitParam(name = "bookName", value = "书名", required = true, dataType = "String", paramType = "path"),
-                @ApiImplicitParam(name = "author", value = "作者", required = true, dataType = "String", paramType = "path"),
-                @ApiImplicitParam(name = "field", value = "领域", required = true, dataType = "String", paramType = "path")
+                @ApiImplicitParam(name = "bookName", value = "书名", required = true, dataType = "String", paramType = "query"),
+                @ApiImplicitParam(name = "author", value = "作者", required = true, dataType = "String", paramType = "query"),
+                @ApiImplicitParam(name = "field", value = "领域", required = true, dataType = "String", paramType = "query")
             }
     )
     @PostMapping(path = "/createBookNode")
@@ -55,9 +58,17 @@ public class BookController {
 
     @GetMapping(path = "/getBookFromField")
     @ApiOperation(value = "查找与传入书籍属于同一领域的其他书籍",notes = "限定五本")
-    @ApiImplicitParam(name = "bookName",value = "书名",required = true,dataType = "String",paramType = "path")
+    @ApiImplicitParam(name = "bookName",value = "书名",required = true,dataType = "String",paramType = "query")
     public Collection<Book> getBookFromField(String bookName){
-        return null;
+        return bookService.getBookFromField(bookName);
 
+    }
+
+    @GetMapping(path = "/getBookField")
+    @ApiOperation(value = "查找参数书籍所关联的领域",notes = "直接关联")
+    @ApiImplicitParam(name = "bookName",value = "书名",required = true,dataType = "string",paramType = "query")
+    public Collection<Keyword> getBookField(String bookName){
+        logger.info("the book is:"+bookName);
+        return bookService.getBookField(bookName);
     }
 }

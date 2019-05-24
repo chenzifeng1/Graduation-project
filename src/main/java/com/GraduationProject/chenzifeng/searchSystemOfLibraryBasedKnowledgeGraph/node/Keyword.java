@@ -5,8 +5,8 @@ import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Property;
 
-@NodeEntity(label = "Field")
-public class Field {
+@NodeEntity(label = "keyword")
+public class Keyword {
     @Id
     @GeneratedValue
     private Long id;
@@ -16,13 +16,13 @@ public class Field {
     @Property
     private String descritbe;
 
-    public Field(Long id, String fieldName, String descritbe) {
+    public Keyword(Long id, String fieldName, String descritbe) {
         this.id = id;
         this.fieldName = fieldName;
         this.descritbe = descritbe;
     }
 
-    public Field() {
+    public Keyword() {
     }
 
     public Long getId() {

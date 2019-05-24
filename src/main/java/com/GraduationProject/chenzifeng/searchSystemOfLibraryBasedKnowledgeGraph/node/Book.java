@@ -44,15 +44,15 @@ public class Book {
 
 
     @Relationship(type = "belong to",direction = Relationship.OUTGOING)
-    private List<Field> bookFields;
+    private List<Keyword> bookKeywords;
     /**
      * 添加书籍领域关系
-     * @param field 对应书籍所属于的领域
+     * @param keyword 对应书籍所属于的领域
      */
-    public void addField(Field field){
-        if (this.bookFields == null)
-            this.bookFields = new ArrayList<Field>();
-        this.bookFields.add(field);
+    public void addField(Keyword keyword){
+        if (this.bookKeywords == null)
+            this.bookKeywords = new ArrayList<Keyword>();
+        this.bookKeywords.add(keyword);
     }
 
     @Relationship(type = "is written by",direction = Relationship.OUTGOING)
@@ -85,8 +85,8 @@ public class Book {
     }
 
 
-    public List<Field> getBookFields() {
-        return bookFields;
+    public List<Keyword> getBookKeywords() {
+        return bookKeywords;
     }
 
     public List<Author> getBookAuthors() {
