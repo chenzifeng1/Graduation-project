@@ -12,22 +12,38 @@ public class Nation {
     @GeneratedValue
     private Long id;
 
-    @Property
-    private String country;
+    @Property(name = "name")
+    private String name;
 
-    public Nation(String country) {
-        this.country = country;
+    @Property(name = "alias")
+    private String alias;
+
+    public Nation(String name) {
+        this.name = name;
+    }
+
+    public Nation(String name, String alias) {
+        this.name = name;
+        this.alias = alias;
     }
 
     public Nation() {
     }
 
-    public String getCountry() {
-        return country;
+    public String getName() {
+        return name;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 
     public Long getId() {

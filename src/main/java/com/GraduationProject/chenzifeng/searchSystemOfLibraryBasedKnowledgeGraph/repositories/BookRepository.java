@@ -14,9 +14,10 @@ import java.util.Collection;
 public interface BookRepository extends Neo4jRepository<Book,Long> {
 
     @Query("MATCH (n:book) RETURN n")
-    Collection<Book> getBookList();
+    Collection<Book> findAll();
 
-    Collection<Book> findBookByAuthor(@Param("author") String author);
+
+
     //Iterable<Book> findBookByField(@Param("field") String field);
 
     /**
@@ -26,8 +27,6 @@ public interface BookRepository extends Neo4jRepository<Book,Long> {
      */
     Book findFirstByName(@Param("bookName") String bookName);
 
-
-    Collection<Book> findAll();
 
     @Query("MATCH (n:book) RETURN n LIMIT 25")
     Collection<Book> getBookSimple();
@@ -39,7 +38,7 @@ public interface BookRepository extends Neo4jRepository<Book,Long> {
      */
     @Query("match p=(n:book)-[r:`belong to`]->(k:keyword) " +
             "where k.name ={field} " +
-            "return n ")
+            "return n limit 3")
     Collection<Book> getBookFromField(@Param("field")String field);
 
     /**

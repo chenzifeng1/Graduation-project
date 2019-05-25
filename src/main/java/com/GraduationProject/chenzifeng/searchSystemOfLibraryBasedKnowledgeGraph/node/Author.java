@@ -13,7 +13,7 @@ public class Author {
 
     @Property(name = "name")
     private String name;
-    @Property
+    @Property(name = "nation")
     private String nation;
 
     public Author(String name) {

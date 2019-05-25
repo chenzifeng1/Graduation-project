@@ -11,15 +11,15 @@ public class Keyword {
     @GeneratedValue
     private Long id;
 
-    @Property
-    private String fieldName;
-    @Property
-    private String descritbe;
+    @Property(name = "name")
+    private String name;
+    @Property(name = "describe")
+    private String describe;
 
-    public Keyword(Long id, String fieldName, String descritbe) {
+    public Keyword(Long id, String name, String describe) {
         this.id = id;
-        this.fieldName = fieldName;
-        this.descritbe = descritbe;
+        this.name = name;
+        this.describe = describe;
     }
 
     public Keyword() {
@@ -29,19 +29,19 @@ public class Keyword {
         return id;
     }
 
-    public String getFieldName() {
-        return fieldName;
+    public String getName() {
+        return name;
     }
 
-    public void setFieldName(String fieldName) {
-        this.fieldName = fieldName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescritbe() {
-        return descritbe;
+    public String getDescribe() {
+        return describe;
     }
 
-    public void setDescritbe(String descritbe) {
-        this.descritbe = descritbe;
+    public void setDescribe(String describe) {
+        this.describe = describe;
     }
 }

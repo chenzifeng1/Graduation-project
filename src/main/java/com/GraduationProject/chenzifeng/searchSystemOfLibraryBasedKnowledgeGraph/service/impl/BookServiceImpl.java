@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.util.Collection;
+import java.util.LinkedList;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -59,10 +61,15 @@ public class BookServiceImpl implements BookService {
      */
     public Collection<Book> getBookFromField(@Param("field") String bookName){
         Collection<Keyword> keywords = bookRepository.getBookField(bookName);
-        Collection<Book> books = null;
+        Collection<Book> books = new LinkedList<>();
         for (Keyword keyword : keywords){
-            books.addAll(bookRepository.getBookFromField(keyword.getFieldName()));
-            logger.info(keyword.getFieldName()+':'+ keyword.getId());
+            String k = keyword.getName();
+            Collection<Book> sub_book = bookRepository.getBookFromField(keyword.getName());
+            System.out.println("book tag:"+k);
+            for (Book book:sub_book){
+                System.out.println(book.getName());
+            }
+            books.addAll(sub_book);
         }
 
         return books;
@@ -77,7 +84,7 @@ public class BookServiceImpl implements BookService {
         logger.info("the book is:"+bookName);
         Collection<Keyword> keywords =  bookRepository.getBookField(bookName);
         for (Keyword keyword : keywords){
-            System.out.println(keyword.getFieldName());
+            System.out.println(keyword.getName());
         }
         return keywords;
     }

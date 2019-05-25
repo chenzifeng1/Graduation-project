@@ -61,9 +61,13 @@ public class BookController {
     @ApiImplicitParam(name = "bookName",value = "书名",required = true,dataType = "String",paramType = "query")
     public Collection<Book> getBookFromField(String bookName){
         return bookService.getBookFromField(bookName);
-
     }
 
+
+    /**
+     * @param bookName
+     * @return
+     */
     @GetMapping(path = "/getBookField")
     @ApiOperation(value = "查找参数书籍所关联的领域",notes = "直接关联")
     @ApiImplicitParam(name = "bookName",value = "书名",required = true,dataType = "string",paramType = "query")

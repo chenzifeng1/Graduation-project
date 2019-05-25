@@ -1,6 +1,7 @@
 package com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.repositories;
 
-import com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.node.Keyword;
+
+import com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.node.Nation;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -8,16 +9,12 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 
 @Repository
-public interface KeywordRepository extends Neo4jRepository<Keyword,Long> {
+public interface NationRepository extends Neo4jRepository<Nation,Long> {
 
     /**
-     * 通过领域名词查找某一领域
-     * @param name
+     * 查找国家接口
+     * @param country
      * @return
      */
-    Keyword  findFirstByName(@Param("name")String name);
-
-
-
-
+    Nation findFirstByName(@Param("country")String country);
 }

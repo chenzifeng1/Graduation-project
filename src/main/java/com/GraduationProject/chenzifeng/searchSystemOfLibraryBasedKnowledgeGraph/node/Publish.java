@@ -3,32 +3,34 @@ package com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGrap
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Property;
 
-@NodeEntity
+@NodeEntity(label = "publish")
 public class Publish {
     @Id
     @GeneratedValue
     private long id;
 
-    private String publisher;//出版社
+    @Property(name = "name")
+    private String name;//出版社
 
     public Publish() {
 
     }
 
-    public Publish(String publisher) {
-        this.publisher = publisher;
+    public Publish(String name) {
+        this.name = name;
     }
 
     public long getId() {
         return id;
     }
 
-    public String getPublisher() {
-        return publisher;
+    public String getName() {
+        return name;
     }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
+    public void setName(String name) {
+        this.name = name;
     }
 }
