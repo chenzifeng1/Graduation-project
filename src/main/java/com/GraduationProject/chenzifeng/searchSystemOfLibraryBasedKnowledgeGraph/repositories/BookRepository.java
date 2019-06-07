@@ -49,5 +49,14 @@ public interface BookRepository extends Neo4jRepository<Book,Long> {
     @Query("MATCH p=(b:book)-[r:`belong to`]->(n:keyword) WHERE b.name ={bookName} RETURN n LIMIT 3")
     Collection<Keyword> getBookField(@Param("bookName") String bookName);
 
+    /**
+     * 根据领域标签寻找书籍
+     * @param tag
+     * @return
+     */
+    @Query("MATCH p=(b:book)-[r:`belong to`]->(t:tag) where t.name ={tag} RETURN b")
+    Collection<Book> getBookByTag(@Param("tag") String tag);
+
+
 
 }

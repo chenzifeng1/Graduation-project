@@ -47,4 +47,6 @@ public interface AuthorRepository extends Neo4jRepository<Author,Long> {
     @Query("MATCH (b:book)-[:`is written by`]->(a:author) WHERE b.name = {book} RETURN a")
     Collection<Author> findAuthorByBook(@Param("book") String book);
 
+
+
 }

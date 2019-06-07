@@ -2,6 +2,7 @@ package com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGrap
 
 
 import com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.node.Nation;
+import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -17,4 +18,14 @@ public interface NationRepository extends Neo4jRepository<Nation,Long> {
      * @return
      */
     Nation findFirstByName(@Param("country")String country);
+
+    /**
+     * 查找作者的国籍
+     * @param author
+     * @return
+     */
+    @Query("MATCH p=(a:author)-[r:`nationality is`]->(n:nation) " +
+            "where a.name ={author} " +
+            "RETURN n")
+    Nation getAuthorNation(@Param("author") String author);
 }
