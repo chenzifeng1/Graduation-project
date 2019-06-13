@@ -1,12 +1,13 @@
 package com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.controller;
 
-import com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.node.Keyword;
 import com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.node.Book;
+import com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.node.Tag;
 import com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.service.LogDescribe;
 import com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGraph.service.impl.BookServiceImpl;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,8 @@ public class BookController {
     @ApiOperation(value = "根据书名获取书籍",notes = "返回从此节点出发的关系的所有书籍，仅一层关系")
     @ApiImplicitParam(name = "bookName", value = "书名", required = true, dataType = "String", paramType = "query")
     @GetMapping(path = "/getBookByName")
-    public Book getBookByName(String bookName){
-
+    public Object getBookByName(String bookName){
+        System.out.println(bookName);
         return bookService.findFirstByName(bookName);
     }
 
@@ -71,8 +72,34 @@ public class BookController {
     @GetMapping(path = "/getBookField")
     @ApiOperation(value = "查找参数书籍所关联的领域",notes = "直接关联")
     @ApiImplicitParam(name = "bookName",value = "书名",required = true,dataType = "string",paramType = "query")
-    public Collection<Keyword> getBookField(String bookName){
+    public Collection<Tag> getBookField(String bookName){
         logger.info("the book is:"+bookName);
         return bookService.getBookField(bookName);
     }
+
+    @GetMapping(path = "/getBookByPublisher")
+    @ApiOperation(value = "根据出版社查找书籍",notes = "返回书籍信息")
+    @ApiImplicitParam(name = "book",value = "书名",required = true,dataType = "string",paramType = "query")
+    public Object getBookByPublisher(String book){
+        return bookService.findBookByPublisher(book);
+    }
+
+
+    @GetMapping(path = "/getBookByAuthor")
+    @ApiOperation(value = "根据作者查找书籍",notes = "返回书籍信息")
+    @ApiImplicitParam(name = "book",value = "书名",required = true,dataType = "string",paramType = "query")
+    public Object getBookByAuthor(String book){
+        System.out.println(book);
+        return bookService.findByAuthor(book);
+    }
+
+    @GetMapping(path = "/getBookByAuthorAndTag")
+    @ApiOperation(value = "根据作者和领域查找书籍",notes = "返回书籍信息")
+    @ApiImplicitParam(name = "book",value = "书名",required = true,dataType = "string",paramType = "query")
+    public Object getBookByAuthorAndTag(String book){
+        return bookService.getBookByAuthorAndTag(book);
+    }
+
+
+
 }

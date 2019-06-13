@@ -14,4 +14,6 @@ public interface BookService {
     Object findByAuthor(String author);
     Object findAll();
 
+    Object findBookByPublisher(String publisher);
+
 }

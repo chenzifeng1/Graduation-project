@@ -17,7 +17,7 @@ public interface AuthorRepository extends Neo4jRepository<Author,Long> {
      * @param nation
      * @return
      */
-    @Query("MATCH (a:author)-[:`nationality is`]->(n:nation) " +
+    @Query("MATCH (a:author)-[:`nationality_is`]->(n:nation) " +
             "WHERE n.nation = {nation} " +
             "RETURN a")
     Collection<Author> findAuthorByNation(@Param("nation") String nation);
@@ -27,7 +27,7 @@ public interface AuthorRepository extends Neo4jRepository<Author,Long> {
      * @param name  作者姓名
      * @return
      */
-    @Query("MATCH (b:book)-[:belong to]->(a:author) " +
+    @Query("MATCH (b:book)-[:belong_to]->(a:author) " +
             "WHERE a.name = {name} " +
             "RETURN b")
     Collection<Book> findBookByAuthor(@Param("name")String name);
@@ -37,6 +37,7 @@ public interface AuthorRepository extends Neo4jRepository<Author,Long> {
      * @param name
      * @return
      */
+
     Author findFirstByName(@Param("name") String name);
 
     /**
@@ -44,8 +45,8 @@ public interface AuthorRepository extends Neo4jRepository<Author,Long> {
      * @param book
      * @return
      */
-    @Query("MATCH (b:book)-[:`is written by`]->(a:author) WHERE b.name = {book} RETURN a")
-    Collection<Author> findAuthorByBook(@Param("book") String book);
+    @Query("MATCH (b:book)-[:is_written_by]->(a:author) WHERE b.name = {book} RETURN a limit 1")
+    Author findAuthorByBook(@Param("book") String book);
 
 
 

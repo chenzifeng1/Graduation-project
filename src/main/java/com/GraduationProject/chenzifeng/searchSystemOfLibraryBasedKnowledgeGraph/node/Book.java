@@ -6,6 +6,7 @@ package com.GraduationProject.chenzifeng.searchSystemOfLibraryBasedKnowledgeGrap
 import org.neo4j.ogm.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -25,12 +26,18 @@ public class Book {
     @GeneratedValue
     private Long id;
 
+    @Property(name = "book_id")
+    private long book_id;
     @Property(name = "name")
     private String name;
     @Property(name = "author")
     private String author;
-
-
+    @Property(name ="publisher")
+    private String publisher;
+    @Property(name ="desc")
+    private String desc;
+    @Property(name ="img")
+    private String img;
 
     public Book(String name, String author) {
         this.name = name;
@@ -38,21 +45,38 @@ public class Book {
 
     }
 
+
+    public Book(long book_id,String name, String author, String publisher) {
+        this.book_id = book_id;
+        this.name = name;
+        this.author = author;
+        this.publisher = publisher;
+    }
+
+    public Book(long book_id, String name, String author, String publisher, String desc, String img) {
+        this.book_id = book_id;
+        this.name = name;
+        this.author = author;
+        this.publisher = publisher;
+        this.desc = desc;
+        this.img = img;
+    }
+
     public Book() {
     }
 
 
 
-    @Relationship(type = "belong to",direction = Relationship.OUTGOING)
-    private List<Keyword> bookKeywords;
+    @Relationship(type = "belong_to",direction = Relationship.OUTGOING)
+    private Collection<Tag> bookTags;
     /**
      * 添加书籍领域关系
-     * @param keyword 对应书籍所属于的领域
+     * @param tag 对应书籍所属于的领域
      */
-    public void addField(Keyword keyword){
-        if (this.bookKeywords == null)
-            this.bookKeywords = new ArrayList<Keyword>();
-        this.bookKeywords.add(keyword);
+    public void addFieldTag(Tag tag){
+        if (this.bookTags == null)
+            this.bookTags = new ArrayList<Tag>();
+        this.bookTags.add(tag);
     }
 
     @Relationship(type = "is written by",direction = Relationship.OUTGOING)
@@ -84,9 +108,42 @@ public class Book {
         this.author = author;
     }
 
+    public String getPublisher() {
+        return publisher;
+    }
 
-    public List<Keyword> getBookKeywords() {
-        return bookKeywords;
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public Collection<Tag> getBookTags() {
+        if (this.bookTags==null)
+            this.bookTags= new ArrayList<>();
+        return bookTags;
+    }
+
+    public long getBook_id() {
+        return book_id;
+    }
+
+    public void setBook_id(long book_id) {
+        this.book_id = book_id;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public List<Author> getBookAuthors() {

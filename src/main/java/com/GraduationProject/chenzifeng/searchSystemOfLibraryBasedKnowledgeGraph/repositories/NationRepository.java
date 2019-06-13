@@ -24,7 +24,7 @@ public interface NationRepository extends Neo4jRepository<Nation,Long> {
      * @param author
      * @return
      */
-    @Query("MATCH p=(a:author)-[r:`nationality is`]->(n:nation) " +
+    @Query("MATCH p=(a:author)-[r:nationality_is]->(n:nation) " +
             "where a.name ={author} " +
             "RETURN n")
     Nation getAuthorNation(@Param("author") String author);
