@@ -100,6 +100,12 @@ public class BookController {
         return bookService.getBookByAuthorAndTag(book);
     }
 
+    @GetMapping(path = "/getBookByTag")
+    @ApiOperation(value = "根据领域查找书籍",notes = "返回书籍信息")
+    @ApiImplicitParam(name = "tag",value = "领域",required = true,dataType = "string",paramType = "query")
+    public Object getBookByTag(String tag){
+        return bookService.findBookByTag(tag);
+    }
 
 
 }

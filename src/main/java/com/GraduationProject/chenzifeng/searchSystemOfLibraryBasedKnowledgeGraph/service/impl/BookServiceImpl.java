@@ -157,6 +157,13 @@ public class BookServiceImpl implements BookService {
          return books;
     }
 
+    public Collection<Book> findBookByTag(String tag){
+        Collection<Book> books = new ArrayList<>();
+        for(Book book: bookRepository.getBookByTag(tag)){
+            ((ArrayList<Book>) books).add(addProperty(book));
+        }
+        return books;
+    }
 
     public Book addProperty(Book book){
         System.out.println(book.getName());
